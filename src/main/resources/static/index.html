@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>NWWS JSON API</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container" style="max-width: 800px;">
+      <br><br>
+      <h3 class="header center orange-text">NWWS JSON API</h3>
+      <div class="row center">
+        <h5 class="header col s12 light">A JSON API for retrieving information from the <a href="https://www.weather.gov/nwws/">NWWS Open Interface</a></h5>
+      </div>
+      <div class="row center">
+        <h4>Why?</h4>
+        <p>NWWS Weather reports, alerts, etc for the United States can only be accessed via a satelite connection, by scraping the NWWS website, or by subscribing to an authenticated XMPP chat room.  For most puposes, this is very cumbersome.  This website provides access to the same information through a JSON API for the sake of convenience.  This website is being hosted on a server that also subscribes to the XMPP server publishing NWWS's information.</p>
+      </div>
+      <div class="row">
+        <h4 style="text-align: center">How?</h4>
+        <p>The JSON API can be accessed in three ways:
+            <div style="text-align: left;">
+                <ul class="browser-default">
+                    <li><a href="/centers">/centers</a> is a human-readable webpage listing the centers with published information.  You can find the 4 digit name of a center close to you <a href="https://www.nws.noaa.gov/mdl/synop/stadrg.php">here</a>.</li>
+                    <li><a href="/center/KBOU">/center/%station_name%</a> lists all messages collected from a given station.</li>
+                    <li><a href="/message/KBOU/NZUS99">/message/%station_name%/%wmo_product_id%</a> returns that latest message a station has published for a given WMO product id.</li>
+                </ul>
+            </div>
+        </p>
+        <p>
+            A message returned by the API has the following format.  The fields reflect those described at the bottom of NWWS's <a href="https://www.weather.gov/nwws/configuration">Configuration</a> page.
+            <pre style="text-align: left; display: inline-block;">
+{
+    "date": "2020-05-24T00:00Z",
+    "awips_id": "SYNBOU",
+    "wmo_product_id": "NZUS99",
+    "subject": "KBOU issues SYN valid 2020-05-24T15:47:00Z",
+    "issuing_center": "KBOU",
+    "id": "10948.5331",
+    "message": "..."
+}
+            </pre>
+             
+        </p>
+      </div>
+      <div class="row center">
+        <h4>Caveats</h4>
+        <p>
+            <div style="text-align: left;">
+                <ul class="browser-default">
+                    <li>This website and the service it provides is not associated with NWWS, NOAA, or any other organization.  Its put together and maintained by one guy who found it useful for himself and thought others might like it too.</li>
+                    <li>Only the most recent message for each wmo product id is returned.</li>
+                </ul>
+            </div>
+        </p>
+      </div>
+      <br><br>
+
+    </div>
+  </div>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Who made this?</h5>
+          <p class="grey-text text-lighten-4">My name is Stephen Beechen and I make little projects like this in my free time.  If you'd like to support this you can give me a shoutout at stephen@beechens.com or</p>
+          <a href="https://www.buymeacoffee.com/sabeechen" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made with <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
